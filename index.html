@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Skies</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --accent-hue: 205; }
+  body {
+    margin: 0; min-height: 100vh; background: #020308; color: #eef1f8;
+    font-family: "Spectral", Georgia, serif; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .wrap { width: min(640px, 100%); }
+  h1 { font-size: clamp(26px, 5vw, 38px); font-weight: 500; margin: 0 0 6px; }
+  p.sub {
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: rgba(238,241,248,0.5);
+    line-height: 1.7; margin: 0 0 36px;
+  }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  li a {
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; color: #eef1f8; padding: 16px 18px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 3px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  li a:hover { border-color: hsla(var(--h), 60%, 65%, 0.6); background: rgba(255,255,255,0.03); }
+  .name { font-size: 17px; }
+  .lock { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(238,241,248,0.4); }
+  .tools { margin-top: 32px; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+  .tools a { color: hsl(205, 70%, 72%); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Five skies, one moment</h1>
+    <p class="sub">Each page shows the real night sky from a different place on Earth, all fixed to the same moment in time. Some stars turn up in more than one sky — that part isn't staged, it's just what's actually up there. Each page needs its own access code.</p>
+    <ul>
+      <li style="--h:205"><a href="page-1-new-york.html"><span class="name">New York City, USA</span><span class="lock">code required</span></a></li>
+      <li style="--h:262"><a href="page-2-london.html"><span class="name">London, United Kingdom</span><span class="lock">code required</span></a></li>
+      <li style="--h:350"><a href="page-3-tokyo.html"><span class="name">Tokyo, Japan</span><span class="lock">code required</span></a></li>
+      <li style="--h:160"><a href="page-4-sydney.html"><span class="name">Sydney, Australia</span><span class="lock">code required</span></a></li>
+      <li style="--h:35"><a href="page-5-cape-town.html"><span class="name">Cape Town, South Africa</span><span class="lock">code required</span></a></li>
+    </ul>
+    <p class="tools">Need to set your own codes or locations? See <a href="code-generator.html">code-generator.html</a> and README.md.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access code generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --accent-hue: 205; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: #020308; color: #eef1f8; font-family: "Spectral", Georgia, serif;
+    padding: 24px;
+  }
+  .card { width: min(520px, 100%); }
+  h1 { font-size: 22px; font-weight: 500; margin: 0 0 8px; }
+  p.note { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: rgba(238,241,248,0.55); line-height: 1.7; margin: 0 0 26px; }
+  label { display:block; font-family:"JetBrains Mono", monospace; font-size: 11px; color: rgba(238,241,248,0.5); margin-bottom: 6px; }
+  input {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);
+    color: #eef1f8; font-size: 16px; padding: 12px 14px; border-radius: 2px; margin-bottom: 18px; box-sizing: border-box;
+  }
+  .out {
+    font-family: "JetBrains Mono", monospace; font-size: 13px; word-break: break-all;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    padding: 14px; border-radius: 2px; min-height: 20px; color: hsl(205, 70%, 75%);
+  }
+  button {
+    margin-top: 14px; background: hsl(205, 45%, 40%); color: #fff; border: none;
+    padding: 10px 16px; border-radius: 2px; font-size: 13px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Access code generator</h1>
+    <p class="note">
+      Each sky page stores a SHA-256 hash of its access code, not the code itself,
+      so the plain code isn't sitting in the page's source. Type a new code below,
+      copy the hash, and paste it into that page's <code>accessCodeHash</code> value.
+      This runs entirely in your browser — nothing is sent anywhere.
+    </p>
+    <label for="code">New access code</label>
+    <input id="code" type="text" placeholder="e.g. midsummer-orion" autocomplete="off" spellcheck="false">
+    <button id="go">Generate hash</button>
+    <label style="margin-top:18px;">Resulting hash (paste into accessCodeHash)</label>
+    <div class="out" id="out">—</div>
+  </div>
+  <script>
+    async function sha256Hex(text) {
+      const bytes = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+    const codeEl = document.getElementById("code");
+    const outEl = document.getElementById("out");
+    async function update() {
+      const val = codeEl.value.trim().toLowerCase();
+      outEl.textContent = val ? await sha256Hex(val) : "—";
+    }
+    document.getElementById("go").addEventListener("click", update);
+    codeEl.addEventListener("keydown", (e) => { if (e.key === "Enter") update(); });
+  </script>
+</body>
+</html>

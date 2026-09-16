@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sydney, Australia — Night Sky</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body style="--accent-hue: 160;">
+
+  <div id="lock-screen" class="lock-screen">
+    <div class="lock-card">
+      <div class="lock-glyph">✦</div>
+      <p class="lock-title">Enter the access code</p>
+      <p class="lock-subtitle">This sky belongs to one of five locations.<br>You'll need the code you were given for this one.</p>
+      <form id="code-form" autocomplete="off">
+        <input id="code-input" type="text" placeholder="Access code" autocapitalize="off" spellcheck="false">
+        <button type="submit">Unlock the sky</button>
+      </form>
+      <p class="lock-error" id="code-error"></p>
+    </div>
+  </div>
+
+  <div id="app" class="app">
+    <canvas id="sky"></canvas>
+    <div class="hud">
+      <p class="hud-place" id="place-name">Sydney, Australia</p>
+      <p class="hud-line" id="place-coords"></p>
+      <p class="hud-line" id="place-time"></p>
+      <p class="hud-line" id="star-count-line">Stars above the horizon right now: <span id="star-count"></span></p>
+    </div>
+    <div class="hud-hint">One of five skies, same moment in time</div>
+  </div>
+
+  <script src="assets/stars-data.js"></script>
+  <script src="assets/observation-time.js"></script>
+  <script src="assets/starmap.js"></script>
+  <script>
+    const PAGE_CONFIG = {
+      placeName: "Sydney, Australia",
+      lat: -33.8688,
+      lon: 151.2093,
+      accessCodeHash: "9f1b7f223d24e934cd0de6e921417911cfc023f14e216dbf5d30acdc00869365",
+    };
+    setupLockScreen(PAGE_CONFIG);
+  </script>
+</body>
+</html>
